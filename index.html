@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>災害警報 — Disaster Alert</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #050a0f;
+  --panel: #0a1520;
+  --border: #1a3a5c;
+  --green: #00ff88;
+  --red: #ff2244;
+  --orange: #ff8800;
+  --yellow: #ffdd00;
+  --blue: #00aaff;
+  --white: #e8f4ff;
+  --dim: #4a7a9b;
+  --font-mono: 'Share Tech Mono', monospace;
+  --font-jp: 'Noto Sans JP', sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; background: var(--bg); color: var(--white); font-family: var(--font-jp); overflow-x: hidden; }
+
+/* scan line effect */
+body::before {
+  content: '';
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.07) 2px, rgba(0,0,0,0.07) 4px);
+  pointer-events: none; z-index: 9999;
+}
+
+.container { max-width: 480px; margin: 0 auto; padding: 16px; min-height: 100vh; display: flex; flex-direction: column; gap: 12px; }
+
+/* Header */
+.header { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border: 1px solid var(--border); background: var(--panel); border-radius: 4px; }
+.header-title { font-family: var(--font-mono); font-size: 11px; color: var(--dim); letter-spacing: 2px; }
+.header-main { font-size: 18px; font-weight: 900; color: var(--white); letter-spacing: 1px; }
+.status-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px var(--green); animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+/* Location card */
+.location-card { border: 1px solid var(--border); background: var(--panel); border-radius: 4px; padding: 14px 16px; }
+.loc-label { font-family: var(--font-mono); font-size: 10px; color: var(--dim); letter-spacing: 2px; margin-bottom: 6px; }
+.loc-coords { font-family: var(--font-mono); font-size: 13px; color: var(--blue); }
+.loc-name { font-size: 16px; font-weight: 700; margin-top: 4px; }
+.loc-btn { margin-top: 10px; width: 100%; padding: 9px; background: transparent; border: 1px solid var(--blue); color: var(--blue); font-family: var(--font-mono); font-size: 12px; letter-spacing: 1px; cursor: pointer; border-radius: 2px; transition: all 0.2s; }
+.loc-btn:hover { background: rgba(0,170,255,0.1); }
+.loc-btn:disabled { opacity: 0.4; cursor: default; }
+
+/* Alert level bar */
+.level-bar { border: 1px solid var(--border); background: var(--panel); border-radius: 4px; padding: 14px 16px; }
+.level-label { font-family: var(--font-mono); font-size: 10px; color: var(--dim); letter-spacing: 2px; margin-bottom: 10px; }
+.level-steps { display: flex; gap: 4px; }
+.level-step { flex: 1; height: 28px; border-radius: 2px; background: #0d2030; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 11px; color: var(--dim); transition: all 0.4s; }
+.level-step.active-1 { background: #003300; border-color: var(--green); color: var(--green); box-shadow: 0 0 8px rgba(0,255,136,0.3); }
+.level-step.active-2 { background: #332200; border-color: var(--yellow); color: var(--yellow); box-shadow: 0 0 8px rgba(255,221,0,0.3); }
+.level-step.active-3 { background: #331500; border-color: var(--orange); color: var(--orange); box-shadow: 0 0 8px rgba(255,136,0,0.3); }
+.level-step.active-4 { background: #330008; border-color: var(--red); color: var(--red); box-shadow: 0 0 8px rgba(255,34,68,0.5); animation: blink 0.8s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.6} }
+
+/* Active alert banner */
+.alert-banner { display: none; border-radius: 4px; padding: 16px; border: 1px solid; animation: slideIn 0.4s ease; }
+@keyframes slideIn { from{transform:translateY(-10px);opacity:0} to{transform:translateY(0);opacity:1} }
+.alert-banner.typhoon { border-color: var(--orange); background: rgba(255,136,0,0.08); }
+.alert-banner.tsunami { border-color: var(--red); background: rgba(255,34,68,0.08); }
+.alert-banner.safe { display: block; border-color: var(--green); background: rgba(0,255,136,0.06); }
+.alert-icon { font-size: 32px; margin-bottom: 8px; }
+.alert-type { font-family: var(--font-mono); font-size: 10px; letter-spacing: 3px; margin-bottom: 4px; }
+.alert-title { font-size: 22px; font-weight: 900; margin-bottom: 8px; }
+.alert-body { font-size: 13px; line-height: 1.7; color: #a0c4d8; }
+.alert-time { font-family: var(--font-mono); font-size: 10px; color: var(--dim); margin-top: 10px; }
+
+/* Info grid */
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.info-cell { border: 1px solid var(--border); background: var(--panel); border-radius: 4px; padding: 12px 14px; }
+.info-cell-label { font-family: var(--font-mono); font-size: 9px; color: var(--dim); letter-spacing: 2px; margin-bottom: 5px; }
+.info-cell-value { font-size: 20px; font-weight: 900; }
+.info-cell-unit { font-size: 11px; font-weight: 400; color: var(--dim); margin-left: 2px; }
+
+/* Mini map */
+.minimap { border: 1px solid var(--border); background: var(--panel); border-radius: 4px; padding: 14px 16px; }
+.minimap-label { font-family: var(--font-mono); font-size: 10px; color: var(--dim); letter-spacing: 2px; margin-bottom: 10px; }
+.map-canvas-wrap { position: relative; border-radius: 2px; overflow: hidden; }
+canvas#map { width: 100%; height: 200px; display: block; background: #071520; }
+.map-center-dot { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 14px; height: 14px; }
+.map-center-dot::before { content: ''; position: absolute; inset: 0; border-radius: 50%; background: var(--red); box-shadow: 0 0 12px var(--red); animation: ping 1.5s infinite; }
+.map-center-dot::after { content: ''; position: absolute; inset: 3px; border-radius: 50%; background: var(--white); }
+@keyframes ping { 0%{box-shadow:0 0 0 0 rgba(255,34,68,0.6)} 100%{box-shadow:0 0 0 20px rgba(255,34,68,0)} }
+
+/* Simulate controls */
+.sim-panel { border: 1px solid var(--border); background: var(--panel); border-radius: 4px; padding: 14px 16px; }
+.sim-label { font-family: var(--font-mono); font-size: 10px; color: var(--dim); letter-spacing: 2px; margin-bottom: 10px; }
+.sim-btns { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+.sim-btn { padding: 10px 6px; background: transparent; border: 1px solid var(--border); color: var(--dim); font-family: var(--font-mono); font-size: 10px; letter-spacing: 1px; cursor: pointer; border-radius: 2px; transition: all 0.2s; text-align: center; line-height: 1.5; }
+.sim-btn:hover { border-color: var(--blue); color: var(--blue); background: rgba(0,170,255,0.07); }
+.sim-btn.typhoon-btn:hover { border-color: var(--orange); color: var(--orange); background: rgba(255,136,0,0.07); }
+.sim-btn.tsunami-btn:hover { border-color: var(--red); color: var(--red); background: rgba(255,34,68,0.07); }
+
+/* Clock */
+.clock { font-family: var(--font-mono); font-size: 11px; color: var(--dim); text-align: right; padding: 4px 0; }
+
+/* Scrolling ticker */
+.ticker-wrap { border: 1px solid var(--border); background: #040d16; border-radius: 4px; overflow: hidden; position: relative; height: 30px; }
+.ticker-label { position: absolute; left: 0; top: 0; bottom: 0; padding: 0 10px; background: var(--red); font-family: var(--font-mono); font-size: 10px; letter-spacing: 1px; display: flex; align-items: center; z-index: 2; white-space: nowrap; }
+.ticker-inner { display: flex; align-items: center; height: 100%; padding-left: 80px; animation: scroll 25s linear infinite; white-space: nowrap; font-family: var(--font-mono); font-size: 11px; color: var(--dim); }
+@keyframes scroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+footer { font-family: var(--font-mono); font-size: 9px; color: #1a3a5c; text-align: center; padding: 8px 0 16px; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="clock" id="clock">--:--:--</div>
+
+  <div class="header">
+    <div>
+      <div class="header-title">JMA COMPATIBLE</div>
+      <div class="header-main">災害警報システム</div>
+    </div>
+    <div style="text-align:right">
+      <div class="status-dot" id="statusDot"></div>
+      <div style="font-family:var(--font-mono);font-size:9px;color:var(--dim);margin-top:4px;" id="statusText">MONITORING</div>
+    </div>
+  </div>
+
+  <div class="ticker-wrap">
+    <div class="ticker-label">NHK</div>
+    <div class="ticker-inner" id="ticker">
+      気象庁発表　台風情報　津波注意報　緊急地震速報　避難指示　気象庁発表　台風情報　津波注意報　緊急地震速報　避難指示　気象庁発表　台風情報　津波注意報　緊急地震速報　避難指示　
+    </div>
+  </div>
+
+  <div class="location-card">
+    <div class="loc-label">◈ YOUR LOCATION</div>
+    <div class="loc-coords" id="coords">-- 取得中 --</div>
+    <div class="loc-name" id="locName">位置情報を取得しています...</div>
+    <button class="loc-btn" id="locBtn" onclick="getLocation()">⌖ UPDATE LOCATION</button>
+  </div>
+
+  <div class="level-bar">
+    <div class="level-label">◈ ALERT LEVEL</div>
+    <div class="level-steps">
+      <div class="level-step active-1" id="lv1">LV1</div>
+      <div class="level-step" id="lv2">LV2</div>
+      <div class="level-step" id="lv3">LV3</div>
+      <div class="level-step" id="lv4">LV4</div>
+    </div>
+  </div>
+
+  <div class="alert-banner safe" id="alertBanner">
+    <div class="alert-icon">✅</div>
+    <div class="alert-type" style="color:var(--green)">STATUS</div>
+    <div class="alert-title" style="color:var(--green)">現在、警報なし</div>
+    <div class="alert-body">Your area is currently safe. No active typhoon or tsunami warnings detected. Stay alert and keep this app open.</div>
+    <div class="alert-time" id="alertTime">UPDATED: --</div>
+  </div>
+
+  <div class="info-grid">
+    <div class="info-cell">
+      <div class="info-cell-label">WIND SPEED</div>
+      <div class="info-cell-value" id="windVal" style="color:var(--blue)">--<span class="info-cell-unit">m/s</span></div>
+    </div>
+    <div class="info-cell">
+      <div class="info-cell-label">WAVE HEIGHT</div>
+      <div class="info-cell-value" id="waveVal" style="color:var(--blue)">--<span class="info-cell-unit">m</span></div>
+    </div>
+    <div class="info-cell">
+      <div class="info-cell-label">PRESSURE</div>
+      <div class="info-cell-value" id="pressVal" style="color:var(--blue)">--<span class="info-cell-unit">hPa</span></div>
+    </div>
+    <div class="info-cell">
+      <div class="info-cell-label">DISTANCE</div>
+      <div class="info-cell-value" id="distVal" style="color:var(--blue)">--<span class="info-cell-unit">km</span></div>
+    </div>
+  </div>
+
+  <div class="minimap">
+    <div class="minimap-label">◈ YOUR POSITION</div>
+    <div class="map-canvas-wrap">
+      <canvas id="map" width="448" height="200"></canvas>
+      <div class="map-center-dot" id="centerDot"></div>
+    </div>
+  </div>
+
+  <div class="sim-panel">
+    <div class="sim-label">◈ SIMULATE ALERT (DEMO)</div>
+    <div class="sim-btns">
+      <button class="sim-btn typhoon-btn" onclick="triggerAlert('typhoon','watch')">🌀<br>TYPHOON<br>WATCH</button>
+      <button class="sim-btn typhoon-btn" onclick="triggerAlert('typhoon','warning')">🌪<br>TYPHOON<br>WARNING</button>
+      <button class="sim-btn tsunami-btn" onclick="triggerAlert('tsunami','watch')">🌊<br>TSUNAMI<br>WATCH</button>
+      <button class="sim-btn tsunami-btn" onclick="triggerAlert('tsunami','warning')">🚨<br>TSUNAMI<br>WARNING</button>
+      <button class="sim-btn tsunami-btn" onclick="triggerAlert('tsunami','major')">⚠️<br>MAJOR<br>TSUNAMI</button>
+      <button class="sim-btn" onclick="clearAlert()">✓<br>ALL<br>CLEAR</button>
+    </div>
+  </div>
+
+  <footer>DISASTER ALERT SYSTEM v1.0 — FOR DEMONSTRATION USE ONLY<br>実際の災害情報は気象庁・NHKをご確認ください</footer>
+</div>
+
+<script>
+let userLat = null, userLon = null;
+
+// Clock
+function updateClock() {
+  const now = new Date();
+  document.getElementById('clock').textContent =
+    now.toLocaleTimeString('ja-JP', {hour12: false}) + ' JST';
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+// Alert time
+function updateAlertTime() {
+  const now = new Date();
+  document.getElementById('alertTime').textContent =
+    'UPDATED: ' + now.toLocaleTimeString('ja-JP', {hour12: false});
+}
+
+// Geolocation
+function getLocation() {
+  const btn = document.getElementById('locBtn');
+  btn.disabled = true;
+  btn.textContent = '⌖ ACQUIRING...';
+  document.getElementById('coords').textContent = '取得中...';
+  document.getElementById('locName').textContent = '位置情報を取得しています...';
+
+  if (!navigator.geolocation) {
+    document.getElementById('coords').textContent = 'Geolocation not supported';
+    document.getElementById('locName').textContent = '手動で入力してください';
+    btn.disabled = false; btn.textContent = '⌖ UPDATE LOCATION';
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    pos => {
+      userLat = pos.coords.latitude;
+      userLon = pos.coords.longitude;
+      document.getElementById('coords').textContent =
+        userLat.toFixed(5) + '°N, ' + userLon.toFixed(5) + '°E';
+      reverseGeocode(userLat, userLon);
+      drawMap(userLat, userLon);
+      btn.disabled = false; btn.textContent = '⌖ UPDATE LOCATION';
+      updateAlertTime();
+    },
+    err => {
+      // fallback to Tokyo
+      userLat = 35.6762; userLon = 139.6503;
+      document.getElementById('coords').textContent = userLat + '°N, ' + userLon + '°E';
+      document.getElementById('locName').textContent = 'Tokyo, Japan (default)';
+      drawMap(userLat, userLon);
+      btn.disabled = false; btn.textContent = '⌖ UPDATE LOCATION';
+    },
+    { timeout: 10000 }
+  );
+}
+
+function reverseGeocode(lat, lon) {
+  fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`)
+    .then(r => r.json())
+    .then(d => {
+      const a = d.address;
+      const name = a.city || a.town || a.village || a.county || 'Unknown area';
+      const pref = a.state || '';
+      document.getElementById('locName').textContent = (pref ? pref + ' · ' : '') + name;
+    })
+    .catch(() => {
+      document.getElementById('locName').textContent = lat.toFixed(3) + ', ' + lon.toFixed(3);
+    });
+}
+
+// Draw mini map
+function drawMap(lat, lon) {
+  const canvas = document.getElementById('map');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  ctx.clearRect(0, 0, W, H);
+
+  // Grid
+  ctx.strokeStyle = '#0d2535';
+  ctx.lineWidth = 1;
+  for (let x = 0; x < W; x += 30) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
+  for (let y = 0; y < H; y += 30) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
+
+  // Concentric radar circles
+  const cx = W/2, cy = H/2;
+  for (let r = 30; r < 200; r += 30) {
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI*2);
+    ctx.strokeStyle = 'rgba(0,170,255,0.08)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+
+  // Radar sweep animation
+  let angle = 0;
+  function sweep() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = '#071520';
+    ctx.fillRect(0, 0, W, H);
+
+    ctx.strokeStyle = '#0d2535'; ctx.lineWidth = 1;
+    for (let x = 0; x < W; x += 30) { ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,H); ctx.stroke(); }
+    for (let y = 0; y < H; y += 30) { ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(W,y); ctx.stroke(); }
+
+    for (let r = 30; r < 200; r += 30) {
+      ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI*2);
+      ctx.strokeStyle = 'rgba(0,170,255,0.08)'; ctx.lineWidth = 1; ctx.stroke();
+    }
+
+    // Sweep gradient
+    const grad = ctx.createConicalGradient ? null : null;
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.rotate(angle);
+    const sweepGrad = ctx.createLinearGradient(0, 0, 120, 0);
+    sweepGrad.addColorStop(0, 'rgba(0,255,136,0.25)');
+    sweepGrad.addColorStop(1, 'rgba(0,255,136,0)');
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.arc(0, 0, 150, -0.4, 0.4);
+    ctx.closePath();
+    ctx.fillStyle = sweepGrad;
+    ctx.fill();
+    ctx.restore();
+
+    // Sweep line
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.rotate(angle);
+    ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(150, 0);
+    ctx.strokeStyle = 'rgba(0,255,136,0.6)'; ctx.lineWidth = 1.5; ctx.stroke();
+    ctx.restore();
+
+    // Labels
+    ctx.fillStyle = 'rgba(0,170,255,0.3)'; ctx.font = '9px monospace';
+    ctx.fillText(lat.toFixed(2)+'°N', 6, 14);
+    ctx.fillText(lon.toFixed(2)+'°E', 6, 26);
+
+    angle += 0.025;
+    requestAnimationFrame(sweep);
+  }
+  sweep();
+}
+
+// Alert state
+function setLevel(lv) {
+  for (let i = 1; i <= 4; i++) {
+    const el = document.getElementById('lv'+i);
+    el.className = 'level-step';
+    if (i <= lv) el.className = 'level-step active-' + Math.min(lv, 4);
+  }
+}
+
+function triggerAlert(type, severity) {
+  const banner = document.getElementById('alertBanner');
+  banner.className = 'alert-banner';
+  banner.style.display = 'block';
+
+  const alerts = {
+    typhoon_watch: {
+      level: 2, icon: '🌀', type_label: 'TYPHOON — WATCH',
+      title: '台風接近注意', color: 'var(--yellow)',
+      body: 'A typhoon is approaching your area. Winds expected up to 25 m/s. Monitor updates every 30 minutes. Secure loose outdoor items.',
+      wind: '25', wave: '2.5', press: '975', dist: '340'
+    },
+    typhoon_warning: {
+      level: 3, icon: '🌪', type_label: 'TYPHOON — WARNING',
+      title: '台風警報 発令中', color: 'var(--orange)',
+      body: 'Typhoon warning in effect for your area. Sustained winds 35–50 m/s. Evacuate low-lying coastal areas immediately. Do not go outside.',
+      wind: '48', wave: '6.0', press: '950', dist: '120'
+    },
+    tsunami_watch: {
+      level: 2, icon: '🌊', type_label: 'TSUNAMI — WATCH',
+      title: '津波注意報', color: 'var(--yellow)',
+      body: 'A tsunami watch is in effect. Wave heights of 0.5–1m possible. Stay away from beaches and harbors. Monitor this alert.',
+      wind: '--', wave: '0.8', press: '--', dist: '250'
+    },
+    tsunami_warning: {
+      level: 3, icon: '🚨', type_label: 'TSUNAMI — WARNING',
+      title: '津波警報', color: 'var(--red)',
+      body: 'Tsunami warning issued. Waves up to 3m expected. Move immediately to high ground. Do NOT stay near the coast.',
+      wind: '--', wave: '3.0', press: '--', dist: '80'
+    },
+    tsunami_major: {
+      level: 4, icon: '⚠️', type_label: 'MAJOR TSUNAMI — EMERGENCY',
+      title: '大津波警報 ！！', color: 'var(--red)',
+      body: '🔴 EMERGENCY: Major tsunami imminent. Waves over 5m expected. EVACUATE IMMEDIATELY to highest available ground. This is a life-threatening emergency.',
+      wind: '--', wave: '8+', press: '--', dist: '30'
+    }
+  };
+
+  const key = type + '_' + severity;
+  const a = alerts[key];
+  if (!a) return;
+
+  banner.className = 'alert-banner ' + type;
+  banner.innerHTML = `
+    <div class="alert-icon">${a.icon}</div>
+    <div class="alert-type" style="color:${a.color}">${a.type_label}</div>
+    <div class="alert-title" style="color:${a.color}">${a.title}</div>
+    <div class="alert-body">${a.body}</div>
+    <div class="alert-time" id="alertTime">ISSUED: ${new Date().toLocaleTimeString('ja-JP')}</div>
+  `;
+
+  setLevel(a.level);
+  document.getElementById('windVal').innerHTML = a.wind + '<span class="info-cell-unit">m/s</span>';
+  document.getElementById('waveVal').innerHTML = a.wave + '<span class="info-cell-unit">m</span>';
+  document.getElementById('pressVal').innerHTML = a.press + '<span class="info-cell-unit">hPa</span>';
+  document.getElementById('distVal').innerHTML = a.dist + '<span class="info-cell-unit">km</span>';
+
+  // Update ticker
+  const msgs = {
+    typhoon_watch: '⚡ 台風接近注意報 発令中  •  TYPHOON WATCH IN EFFECT  •  強風・大雨に注意  •  ',
+    typhoon_warning: '🚨 台風警報 発令中！  •  TYPHOON WARNING — EVACUATE NOW  •  外出厳禁  •  ',
+    tsunami_watch: '⚡ 津波注意報 発令中  •  TSUNAMI WATCH  •  海岸に近づかないでください  •  ',
+    tsunami_warning: '🚨 津波警報！  •  TSUNAMI WARNING — MOVE TO HIGH GROUND  •  直ちに避難  •  ',
+    tsunami_major: '🔴 大津波警報！！  •  MAJOR TSUNAMI EMERGENCY — EVACUATE IMMEDIATELY  •  命を守る行動を！  •  '
+  };
+  const t = document.getElementById('ticker');
+  const msg = msgs[key] || '';
+  t.textContent = (msg + msg + msg);
+
+  // Vibrate if supported
+  if (navigator.vibrate && a.level >= 3) navigator.vibrate([200, 100, 200, 100, 400]);
+
+  document.getElementById('statusDot').style.background = a.color;
+  document.getElementById('statusDot').style.boxShadow = '0 0 10px ' + a.color;
+  document.getElementById('statusText').textContent = 'ALERT ACTIVE';
+}
+
+function clearAlert() {
+  const banner = document.getElementById('alertBanner');
+  banner.className = 'alert-banner safe';
+  banner.style.display = 'block';
+  banner.innerHTML = `
+    <div class="alert-icon">✅</div>
+    <div class="alert-type" style="color:var(--green)">STATUS</div>
+    <div class="alert-title" style="color:var(--green)">現在、警報なし</div>
+    <div class="alert-body">Your area is currently safe. No active typhoon or tsunami warnings. Stay alert and keep this app open.</div>
+    <div class="alert-time" id="alertTime">UPDATED: ${new Date().toLocaleTimeString('ja-JP')}</div>
+  `;
+  setLevel(1);
+  document.getElementById('windVal').innerHTML = '--<span class="info-cell-unit">m/s</span>';
+  document.getElementById('waveVal').innerHTML = '--<span class="info-cell-unit">m</span>';
+  document.getElementById('pressVal').innerHTML = '--<span class="info-cell-unit">hPa</span>';
+  document.getElementById('distVal').innerHTML = '--<span class="info-cell-unit">km</span>';
+  document.getElementById('statusDot').style.background = 'var(--green)';
+  document.getElementById('statusDot').style.boxShadow = '0 0 8px var(--green)';
+  document.getElementById('statusText').textContent = 'MONITORING';
+  document.getElementById('ticker').textContent =
+    '気象庁発表　台風情報　津波注意報　緊急地震速報　避難指示　気象庁発表　台風情報　津波注意報　緊急地震速報　避難指示　気象庁発表　台風情報　津波注意報　緊急地震速報　避難指示　';
+}
+
+// Auto-get location on load
+window.onload = () => {
+  drawMap(35.6762, 139.6503);
+  getLocation();
+};
+</script>
+</body>
+</html>
