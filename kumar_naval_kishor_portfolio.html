@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kumar Naval Kishor | Front-End Developer Portfolio</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            900: '#1e1b4b',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-brand-600 selection:text-white">
+
+    <!-- NAVIGATION BAR -->
+    <header class="fixed top-0 inset-x-0 z-50 bg-white/85 backdrop-blur-md border-b border-slate-200/80 transition-all">
+        <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <a href="#home" class="flex items-center gap-2.5 group">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-600 to-cyan-500 flex items-center justify-center text-white font-bold text-lg shadow-sm group-hover:scale-105 transition-transform">
+                    K
+                </div>
+                <span class="font-bold text-lg tracking-tight text-slate-900">Kumar<span class="text-brand-600">.dev</span></span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <ul class="hidden md:flex items-center gap-7 text-sm font-medium text-slate-600">
+                <li><a href="#home" class="hover:text-brand-600 transition-colors">Home</a></li>
+                <li><a href="#about" class="hover:text-brand-600 transition-colors">Gallery</a></li>
+                <li><a href="#skills" class="hover:text-brand-600 transition-colors">Skills</a></li>
+                <li><a href="#projects" class="hover:text-brand-600 transition-colors">Projects</a></li>
+                <li><a href="#experience" class="hover:text-brand-600 transition-colors">Experience</a></li>
+                <li>
+                    <a href="#contact" class="px-4 py-2 rounded-xl bg-slate-900 text-white hover:bg-brand-600 transition-colors shadow-sm">
+                        Contact Me
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Mobile Menu Toggle -->
+            <button id="mobileMenuBtn" aria-label="Toggle Menu" class="md:hidden p-2.5 rounded-xl text-slate-700 hover:bg-slate-100 focus:outline-none">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </nav>
+
+        <!-- Mobile Dropdown -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-5 space-y-2 shadow-lg">
+            <a href="#home" class="mobile-link block px-3 py-2.5 rounded-xl text-base font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-600">Home</a>
+            <a href="#about" class="mobile-link block px-3 py-2.5 rounded-xl text-base font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-600">Gallery</a>
+            <a href="#skills" class="mobile-link block px-3 py-2.5 rounded-xl text-base font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-600">Skills</a>
+            <a href="#projects" class="mobile-link block px-3 py-2.5 rounded-xl text-base font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-600">Projects</a>
+            <a href="#experience" class="mobile-link block px-3 py-2.5 rounded-xl text-base font-medium text-slate-700 hover:bg-brand-50 hover:text-brand-600">Experience</a>
+            <a href="#contact" class="mobile-link block px-3 py-2.5 rounded-xl text-base font-semibold bg-brand-600 text-white text-center mt-2">Contact Me</a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="relative pt-28 pb-20 md:pt-36 md:pb-28 overflow-hidden">
+        <!-- Abstract Background Image with Fallback Gradient -->
+        <div class="absolute inset-0 -z-10">
+            <img src="mv-background.png"
+                 onerror="this.style.display='none'"
+                 alt="Abstract Wave Background"
+                 class="w-full h-full object-cover opacity-80">
+            <div class="absolute inset-0 bg-gradient-to-b from-white/70 via-white/80 to-slate-50"></div>
+        </div>
+
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+                <!-- Left Content -->
+                <div class="flex-1 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-50 border border-brand-100 text-brand-700 text-xs sm:text-sm font-semibold mb-6">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                        Available for Front-End & Software Opportunities
+                    </div>
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                        Kumar Naval Kishor
+                    </h1>
+                    <h2 class="mt-3 text-xl sm:text-2xl font-semibold bg-gradient-to-r from-brand-600 to-cyan-600 bg-clip-text text-transparent">
+                        Front-End Developer
+                    </h2>
+
+                    <p class="mt-6 text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                        Hi, I'm Kumar Naval Kishor, a Front-End Developer passionate about creating clean, responsive, and user-friendly web experiences using <span class="font-semibold text-slate-800">HTML, CSS, JavaScript, React, Java, Python, PHP, and SQL</span>.
+                    </p>
+
+                    <!-- Action Buttons -->
+                    <div class="mt-8 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                        <a href="https://it25083010-afk.github.io/kumar/%E5%B1%A5%E6%AD%B4%E6%9B%B8_%E3%82%AF%E3%83%9E%E3%83%AB.pdf"
+                           target="_blank"
+                           download
+                           class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white font-semibold shadow-lg shadow-brand-600/25 transition-all hover:-translate-y-0.5">
+                            <i class="fa-solid fa-file-arrow-down"></i>
+                            Download Resume
+                        </a>
+
+                        <a href="#contact"
+                           class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl bg-white hover:bg-slate-100 text-slate-800 font-semibold border border-slate-200 shadow-sm transition-all hover:-translate-y-0.5">
+                            <i class="fa-regular fa-paper-plane text-brand-600"></i>
+                            Contact Me
+                        </a>
+                    </div>
+
+                    <!-- Quick Tech Pills -->
+                    <div class="mt-10 pt-8 border-t border-slate-200/80 flex flex-wrap items-center justify-center lg:justify-start gap-4 text-xs font-medium text-slate-500">
+                        <span class="flex items-center gap-1.5"><i class="fa-solid fa-location-dot text-brand-600"></i> Tokyo, Japan</span>
+                        <span>•</span>
+                        <span class="flex items-center gap-1.5"><i class="fa-brands fa-python text-amber-500"></i> Python Calculator</span>
+                        <span>•</span>
+                        <span class="flex items-center gap-1.5"><i class="fa-brands fa-java text-rose-500"></i> Java Entry Form</span>
+                    </div>
+                </div>
+
+                <!-- Right Profile Card -->
+                <div class="relative flex-shrink-0">
+                    <div class="w-64 h-64 sm:w-80 sm:h-80 rounded-3xl p-2 bg-white shadow-2xl border border-slate-100 rotate-2 hover:rotate-0 transition-transform duration-300">
+                        <img src="ChatGPT Image 2026年1月19日 09_45_13.png"
+                             onerror="this.src='https://placehold.co/400x400/e0e7ff/4338ca?text=Kumar+Naval+Kishor'"
+                             alt="Kumar Naval Kishor"
+                             class="w-full h-full object-cover object-top rounded-2xl">
+                    </div>
+                    <!-- Floating Badge -->
+                    <div class="absolute -bottom-4 -left-4 sm:-left-6 bg-white px-4 py-3 rounded-2xl shadow-xl border border-slate-100 flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-brand-100 text-brand-600 flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-code"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 font-medium">Full-Stack & UI</p>
+                            <p class="text-sm font-bold text-slate-900">Web • Java • Python</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT & LIFE IN JAPAN GALLERY SECTION -->
+    <section id="about" class="py-16 md:py-24 bg-white border-y border-slate-200/70">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-xs font-bold uppercase tracking-widest text-brand-600">Life & Collaboration</span>
+                <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold text-slate-900">Journey & Moments in Japan</h2>
+                <p class="mt-3 text-slate-600 text-sm sm:text-base">
+                    Exploring technology, collaborating with teammates, and experiencing culture in Japan while building practical software projects.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                <!-- Photo 1 -->
+                <div class="group relative rounded-2xl overflow-hidden bg-slate-100 shadow-sm border border-slate-200/60 aspect-[4/3]">
+                    <img src="IMG_6276.jpg"
+                         onerror="this.src='https://placehold.co/600x450/eef2ff/4f46e5?text=Team+Collaboration'"
+                         alt="Team Collaboration in Tokyo"
+                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/75 via-transparent to-transparent flex items-end p-4">
+                        <p class="text-white text-sm font-semibold">Team Collaboration & Study</p>
+                    </div>
+                </div>
+
+                <!-- Photo 2 -->
+                <div class="group relative rounded-2xl overflow-hidden bg-slate-100 shadow-sm border border-slate-200/60 aspect-[4/3]">
+                    <img src="IMG_5572.jpg"
+                         onerror="this.src='https://placehold.co/600x450/eef2ff/4f46e5?text=Kamakura+Japan'"
+                         alt="Kamakura Great Buddha"
+                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/75 via-transparent to-transparent flex items-end p-4">
+                        <p class="text-white text-sm font-semibold">Exploring Kamakura, Japan</p>
+                    </div>
+                </div>
+
+                <!-- Photo 3 -->
+                <div class="group relative rounded-2xl overflow-hidden bg-slate-100 shadow-sm border border-slate-200/60 aspect-[4/3]">
+                    <img src="IMG_5580.jpg"
+                         onerror="this.src='https://placehold.co/600x450/eef2ff/4f46e5?text=Cultural+Exchange'"
+                         alt="Cultural Exchange in Japan"
+                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/75 via-transparent to-transparent flex items-end p-4">
+                        <p class="text-white text-sm font-semibold">Cultural Exchange & Friends</p>
+                    </div>
+                </div>
+
+                <!-- Photo 4 -->
+                <div class="group relative rounded-2xl overflow-hidden bg-slate-100 shadow-sm border border-slate-200/60 aspect-[4/3]">
+                    <img src="course03.png"
+                         onerror="this.src='https://placehold.co/600x450/0f172a/38bdf8?text=AI+%26+Web+Development'"
+                         alt="AI & Modern Web Development"
+                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent flex items-end p-4">
+                        <p class="text-white text-sm font-semibold">AI & Modern Web Engineering</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section id="skills" class="py-16 md:py-24 bg-slate-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-xs font-bold uppercase tracking-widest text-brand-600">Technical Stack</span>
+                <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold text-slate-900">Skills & Technologies</h2>
+                <p class="mt-3 text-slate-600 text-sm sm:text-base">
+                    Tools and programming languages I use to design, build, and deploy responsive applications.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                <!-- Skill Cards -->
+                <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md hover:border-brand-300 transition-all flex flex-col items-center justify-center gap-3 text-center group">
+                    <i class="fa-brands fa-html5 text-3xl text-orange-500 group-hover:scale-110 transition-transform"></i>
+                    <span class="font-semibold text-slate-800 text-sm">HTML</span>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md hover:border-brand-300 transition-all flex flex-col items-center justify-center gap-3 text-center group">
+                    <i class="fa-brands fa-css3-alt text-3xl text-blue-500 group-hover:scale-110 transition-transform"></i>
+                    <span class="font-semibold text-slate-800 text-sm">CSS</span>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md hover:border-brand-300 transition-all flex flex-col items-center justify-center gap-3 text-center group">
+                    <i class="fa-brands fa-js text-3xl text-yellow-500 group-hover:scale-110 transition-transform"></i>
+                    <span class="font-semibold text-slate-800 text-sm">JavaScript</span>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md hover:border-brand-300 transition-all flex flex-col items-center justify-center gap-3 text-center group">
+                    <i class="fa-brands fa-react text-3xl text-cyan-500 group-hover:scale-110 transition-transform"></i>
+                    <span class="font-semibold text-slate-800 text-sm">React</span>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md hover:border-brand-300 transition-all flex flex-col items-center justify-center gap-3 text-center group">
+                    <i class="fa-brands fa-java text-3xl text-rose-600 group-hover:scale-110 transition-transform"></i>
+                    <span class="font-semibold text-slate-800 text-sm">Java</span>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md hover:border-brand-300 transition-all flex flex-col items-center justify-center gap-3 text-center group">
+                    <i class="fa-brands fa-python text-3xl text-indigo-600 group-hover:scale-110 transition-transform"></i>
+                    <span class="font-semibold text-slate-800 text-sm">Python</span>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md hover:border-brand-300 transition-all flex flex-col items-center justify-center gap-3 text-center group">
+                    <i class="fa-brands fa-php text-3xl text-violet-600 group-hover:scale-110 transition-transform"></i>
+                    <span class="font-semibold text-slate-800 text-sm">PHP</span>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md hover:border-brand-300 transition-all flex flex-col items-center justify-center gap-3 text-center group">
+                    <i class="fa-solid fa-database text-3xl text-emerald-600 group-hover:scale-110 transition-transform"></i>
+                    <span class="font-semibold text-slate-800 text-sm">SQL</span>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md hover:border-brand-300 transition-all flex flex-col items-center justify-center gap-3 text-center group">
+                    <i class="fa-solid fa-file-excel text-3xl text-green-600 group-hover:scale-110 transition-transform"></i>
+                    <span class="font-semibold text-slate-800 text-sm">Excel</span>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md hover:border-brand-300 transition-all flex flex-col items-center justify-center gap-3 text-center group">
+                    <i class="fa-brands fa-github text-3xl text-slate-900 group-hover:scale-110 transition-transform"></i>
+                    <span class="font-semibold text-slate-800 text-sm">GitHub</span>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md hover:border-brand-300 transition-all flex flex-col items-center justify-center gap-3 text-center group sm:col-span-2 md:col-span-2 lg:col-span-2">
+                    <i class="fa-brands fa-figma text-3xl text-pink-500 group-hover:scale-110 transition-transform"></i>
+                    <span class="font-semibold text-slate-800 text-sm">Figma UI/UX Prototyping</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS SECTION (FEATURED PYTHON CALCULATOR + JAVA ENTRY FORM + FIGMA PROJECTS) -->
+    <section id="projects" class="py-16 md:py-24 bg-white border-y border-slate-200/70">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-14">
+                <span class="text-xs font-bold uppercase tracking-widest text-brand-600">Featured Software & UI</span>
+                <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold text-slate-900">Projects & Interactive Demos</h2>
+                <p class="mt-3 text-slate-600 text-sm sm:text-base">
+                    Try my <span class="font-semibold text-slate-800">Python Calculator</span> and <span class="font-semibold text-slate-800">Java Entry Form</span> directly in your browser, inspect their source code, or explore my Figma UI/UX designs.
+                </p>
+            </div>
+
+            <!-- FEATURED SOFTWARE APPLICATIONS GRID -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+
+                <!-- PROJECT 1: PYTHON CALCULATOR -->
+                <div class="bg-slate-50 rounded-3xl border border-slate-200 shadow-sm overflow-hidden flex flex-col">
+                    <div class="p-6 sm:p-7 border-b border-slate-200 bg-white">
+                        <div class="flex items-center justify-between gap-3 flex-wrap">
+                            <div class="flex items-center gap-3">
+                                <div class="w-11 h-11 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center text-xl">
+                                    <i class="fa-brands fa-python"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold text-slate-900">Python Calculator</h3>
+                                    <p class="text-xs font-mono text-slate-500">calculator.py • Tkinter GUI & Arithmetic Engine</p>
+                                </div>
+                            </div>
+                            <!-- Tab Switcher -->
+                            <div class="inline-flex rounded-xl bg-slate-100 p-1 border border-slate-200">
+                                <button onclick="switchPyTab('demo')" id="pyTabDemo" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-slate-900 shadow-sm transition-all">
+                                    Live Demo
+                                </button>
+                                <button onclick="switchPyTab('code')" id="pyTabCode" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:text-slate-900 transition-all">
+                                    Python Code
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-slate-600">
+                            A clean calculator built with Python supporting addition, subtraction, multiplication, division, decimal precision, and zero-division error handling.
+                        </p>
+                    </div>
+
+                    <!-- Python Calculator Live Demo View -->
+                    <div id="pyDemoView" class="p-6 sm:p-7 flex-1 flex flex-col justify-center">
+                        <div class="max-w-xs mx-auto w-full bg-slate-900 p-5 rounded-3xl shadow-xl border border-slate-800">
+                            <!-- Window Header -->
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center gap-1.5">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
+                                    <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+                                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                                </div>
+                                <span class="text-[11px] font-mono text-slate-400">calculator.py</span>
+                            </div>
+                            <!-- Display -->
+                            <div class="bg-slate-950 rounded-2xl p-4 mb-4 text-right border border-slate-800">
+                                <div id="calcHistory" class="text-xs font-mono text-slate-400 h-4 overflow-hidden"></div>
+                                <div id="calcDisplay" class="text-2xl sm:text-3xl font-mono font-bold text-white tracking-wider overflow-x-auto mt-1">0</div>
+                            </div>
+                            <!-- Keypad -->
+                            <div class="grid grid-cols-4 gap-2.5 font-mono text-base font-semibold">
+                                <button onclick="calcClear()" class="col-span-2 py-3 rounded-xl bg-rose-500/20 text-rose-400 hover:bg-rose-500 hover:text-white transition-colors">AC</button>
+                                <button onclick="calcBackspace()" class="py-3 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 transition-colors"><i class="fa-solid fa-delete-left"></i></button>
+                                <button onclick="calcAppend('/')" class="py-3 rounded-xl bg-amber-500/20 text-amber-400 hover:bg-amber-500 hover:text-slate-950 transition-colors">÷</button>
+
+                                <button onclick="calcAppend('7')" class="py-3 rounded-xl bg-slate-800 text-white hover:bg-slate-700 transition-colors">7</button>
+                                <button onclick="calcAppend('8')" class="py-3 rounded-xl bg-slate-800 text-white hover:bg-slate-700 transition-colors">8</button>
+                                <button onclick="calcAppend('9')" class="py-3 rounded-xl bg-slate-800 text-white hover:bg-slate-700 transition-colors">9</button>
+                                <button onclick="calcAppend('*')" class="py-3 rounded-xl bg-amber-500/20 text-amber-400 hover:bg-amber-500 hover:text-slate-950 transition-colors">×</button>
+
+                                <button onclick="calcAppend('4')" class="py-3 rounded-xl bg-slate-800 text-white hover:bg-slate-700 transition-colors">4</button>
+                                <button onclick="calcAppend('5')" class="py-3 rounded-xl bg-slate-800 text-white hover:bg-slate-700 transition-colors">5</button>
+                                <button onclick="calcAppend('6')" class="py-3 rounded-xl bg-slate-800 text-white hover:bg-slate-700 transition-colors">6</button>
+                                <button onclick="calcAppend('-')" class="py-3 rounded-xl bg-amber-500/20 text-amber-400 hover:bg-amber-500 hover:text-slate-950 transition-colors">−</button>
+
+                                <button onclick="calcAppend('1')" class="py-3 rounded-xl bg-slate-800 text-white hover:bg-slate-700 transition-colors">1</button>
+                                <button onclick="calcAppend('2')" class="py-3 rounded-xl bg-slate-800 text-white hover:bg-slate-700 transition-colors">2</button>
+                                <button onclick="calcAppend('3')" class="py-3 rounded-xl bg-slate-800 text-white hover:bg-slate-700 transition-colors">3</button>
+                                <button onclick="calcAppend('+')" class="py-3 rounded-xl bg-amber-500/20 text-amber-400 hover:bg-amber-500 hover:text-slate-950 transition-colors">+</button>
+
+                                <button onclick="calcAppend('0')" class="col-span-2 py-3 rounded-xl bg-slate-800 text-white hover:bg-slate-700 transition-colors">0</button>
+                                <button onclick="calcAppend('.')" class="py-3 rounded-xl bg-slate-800 text-white hover:bg-slate-700 transition-colors">.</button>
+                                <button onclick="calcEvaluate()" class="py-3 rounded-xl bg-brand-600 text-white hover:bg-brand-500 transition-colors shadow-lg shadow-brand-600/30">=</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Python Calculator Source Code View -->
+                    <div id="pyCodeView" class="hidden p-6 flex-1 flex flex-col">
+                        <div class="relative bg-slate-900 rounded-2xl p-4 text-xs font-mono text-slate-200 overflow-x-auto flex-1 max-h-[370px]">
+                            <button onclick="copyCode('pythonSourceCode', this)" class="absolute top-3 right-3 px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] font-sans">
+                                <i class="fa-regular fa-copy mr-1"></i>Copy
+                            </button>
+<pre id="pythonSourceCode" class="leading-relaxed"><code># Python Calculator by Kumar Naval Kishor
+import tkinter as tk
+
+class CalculatorApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Calculator - Kumar Naval Kishor")
+        self.expression = ""
+        self.display_var = tk.StringVar(value="0")
+
+        entry = tk.Entry(root, textvariable=self.display_var,
+                         font=("Consolas", 20), justify="right")
+        entry.grid(row=0, column=0, columnspan=4, padx=10, pady=10)
+
+        buttons = [
+            ('7',1,0), ('8',1,1), ('9',1,2), ('/',1,3),
+            ('4',2,0), ('5',2,1), ('6',2,2), ('*',2,3),
+            ('1',3,0), ('2',3,1), ('3',3,2), ('-',3,3),
+            ('C',4,0), ('0',4,1), ('=',4,2), ('+',4,3),
+        ]
+        for (text, r, c) in buttons:
+            tk.Button(root, text=text, width=5, height=2,
+                      command=lambda t=text: self.on_press(t)).grid(row=r, column=c)
+
+    def on_press(self, char):
+        if char == 'C':
+            self.expression = ""
+            self.display_var.set("0")
+        elif char == '=':
+            try:
+                result = str(eval(self.expression))
+                self.display_var.set(result)
+                self.expression = result
+            except ZeroDivisionError:
+                self.display_var.set("Error: Div by 0")
+                self.expression = ""
+        else:
+            self.expression += char
+            self.display_var.set(self.expression)
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    CalculatorApp(root)
+    root.mainloop()</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PROJECT 2: JAVA ENTRY FORM -->
+                <div class="bg-slate-50 rounded-3xl border border-slate-200 shadow-sm overflow-hidden flex flex-col">
+                    <div class="p-6 sm:p-7 border-b border-slate-200 bg-white">
+                        <div class="flex items-center justify-between gap-3 flex-wrap">
+                            <div class="flex items-center gap-3">
+                                <div class="w-11 h-11 rounded-2xl bg-rose-100 text-rose-600 flex items-center justify-center text-xl">
+                                    <i class="fa-brands fa-java"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold text-slate-900">Java Entry Form</h3>
+                                    <p class="text-xs font-mono text-slate-500">EntryForm.java • Swing Data Registration & Records</p>
+                                </div>
+                            </div>
+                            <!-- Tab Switcher -->
+                            <div class="inline-flex rounded-xl bg-slate-100 p-1 border border-slate-200">
+                                <button onclick="switchJavaTab('demo')" id="javaTabDemo" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-slate-900 shadow-sm transition-all">
+                                    Live Demo
+                                </button>
+                                <button onclick="switchJavaTab('code')" id="javaTabCode" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:text-slate-900 transition-all">
+                                    Java Code
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mt-3 text-sm text-slate-600">
+                            A structured data entry form developed in Java with input validation, instant record storage, and formatted table display.
+                        </p>
+                    </div>
+
+                    <!-- Java Entry Form Live Demo View -->
+                    <div id="javaDemoView" class="p-6 sm:p-7 flex-1 flex flex-col justify-between">
+                        <form id="javaEntryForm" class="space-y-3.5 bg-white p-5 rounded-2xl border border-slate-200/90 shadow-sm">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-700 mb-1">Full Name *</label>
+                                    <input type="text" id="entryName" required placeholder="e.g. Taro Yamada"
+                                           class="w-full px-3.5 py-2 text-sm rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-700 mb-1">Email Address *</label>
+                                    <input type="email" id="entryEmail" required placeholder="taro@example.com"
+                                           class="w-full px-3.5 py-2 text-sm rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-700 mb-1">Course / Role *</label>
+                                    <select id="entryCourse" class="w-full px-3.5 py-2 text-sm rounded-xl border border-slate-300 bg-white focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                        <option value="Web Development">Web Development</option>
+                                        <option value="Java Programming">Java Programming</option>
+                                        <option value="Python & AI">Python & AI</option>
+                                        <option value="UI/UX Design">UI/UX Design</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-700 mb-1">Phone Number *</label>
+                                    <input type="tel" id="entryPhone" required placeholder="080-1234-5678"
+                                           class="w-full px-3.5 py-2 text-sm rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between pt-1 gap-3">
+                                <button type="submit" class="px-5 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs sm:text-sm font-semibold shadow-sm transition-colors">
+                                    <i class="fa-solid fa-plus mr-1.5"></i>Submit Entry
+                                </button>
+                                <button type="button" onclick="clearJavaEntries()" class="text-xs font-medium text-slate-500 hover:text-rose-600">
+                                    Reset Table
+                                </button>
+                            </div>
+                        </form>
+
+                        <!-- Submitted Records Table -->
+                        <div class="mt-4 bg-white rounded-2xl border border-slate-200 overflow-hidden">
+                            <div class="px-4 py-2.5 bg-slate-100 border-b border-slate-200 flex items-center justify-between">
+                                <span class="text-xs font-bold text-slate-700">Saved Entries (DefaultTableModel)</span>
+                                <span id="entryCountBadge" class="text-[11px] font-mono bg-brand-100 text-brand-700 px-2 py-0.5 rounded-full">2 Records</span>
+                            </div>
+                            <div class="overflow-x-auto max-h-36">
+                                <table class="w-full text-left text-xs">
+                                    <thead class="bg-slate-50 text-slate-500 border-b border-slate-200">
+                                        <tr>
+                                            <th class="py-2 px-3">Name</th>
+                                            <th class="py-2 px-3">Course</th>
+                                            <th class="py-2 px-3">Email</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="javaEntryTableBody" class="divide-y divide-slate-100 text-slate-700">
+                                        <tr>
+                                            <td class="py-2 px-3 font-medium">Kumar Naval Kishor</td>
+                                            <td class="py-2 px-3"><span class="px-2 py-0.5 rounded-md bg-indigo-50 text-indigo-700 font-medium">Web Development</span></td>
+                                            <td class="py-2 px-3 text-slate-500">it25083010@tsb-yyg.ac.jp</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-2 px-3 font-medium">Kenji Sato</td>
+                                            <td class="py-2 px-3"><span class="px-2 py-0.5 rounded-md bg-rose-50 text-rose-700 font-medium">Java Programming</span></td>
+                                            <td class="py-2 px-3 text-slate-500">kenji.sato@example.jp</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Java Entry Form Source Code View -->
+                    <div id="javaCodeView" class="hidden p-6 flex-1 flex flex-col">
+                        <div class="relative bg-slate-900 rounded-2xl p-4 text-xs font-mono text-slate-200 overflow-x-auto flex-1 max-h-[370px]">
+                            <button onclick="copyCode('javaSourceCode', this)" class="absolute top-3 right-3 px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] font-sans">
+                                <i class="fa-regular fa-copy mr-1"></i>Copy
+                            </button>
+<pre id="javaSourceCode" class="leading-relaxed"><code>// Java Entry Form by Kumar Naval Kishor
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+
+public class EntryForm extends JFrame {
+    private JTextField nameField, emailField, phoneField;
+    private JComboBox&lt;String&gt; courseBox;
+    private DefaultTableModel tableModel;
+
+    public EntryForm() {
+        setTitle("Student Entry Form - Kumar Naval Kishor");
+        setSize(550, 420);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLayout(new BorderLayout(10, 10));
+
+        JPanel formPanel = new JPanel(new GridLayout(5, 2, 8, 8));
+        formPanel.setBorder(BorderFactory.createEmptyBorder(12, 12, 12, 12));
+
+        nameField = new JTextField();
+        emailField = new JTextField();
+        phoneField = new JTextField();
+        courseBox = new JComboBox&lt;&gt;(new String[]{
+            "Web Development", "Java Programming", "Python & AI", "UI/UX Design"
+        });
+
+        formPanel.add(new JLabel("Full Name:"));   formPanel.add(nameField);
+        formPanel.add(new JLabel("Email:"));       formPanel.add(emailField);
+        formPanel.add(new JLabel("Course:"));      formPanel.add(courseBox);
+        formPanel.add(new JLabel("Phone:"));       formPanel.add(phoneField);
+
+        JButton submitBtn = new JButton("Submit Entry");
+        submitBtn.addActionListener(e -> addEntry());
+        formPanel.add(new JLabel());               formPanel.add(submitBtn);
+
+        tableModel = new DefaultTableModel(new String[]{"Name", "Course", "Email", "Phone"}, 0);
+        add(formPanel, BorderLayout.NORTH);
+        add(new JScrollPane(new JTable(tableModel)), BorderLayout.CENTER);
+    }
+
+    private void addEntry() {
+        String name = nameField.getText().trim();
+        String email = emailField.getText().trim();
+        String phone = phoneField.getText().trim();
+        if (name.isEmpty() || email.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill all required fields!");
+            return;
+        }
+        tableModel.addRow(new Object[]{name, courseBox.getSelectedItem(), email, phone});
+        nameField.setText(""); emailField.setText(""); phoneField.setText("");
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new EntryForm().setVisible(true));
+    }
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FIGMA UI/UX PROJECTS -->
+            <div>
+                <h3 class="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+                    <i class="fa-brands fa-figma text-pink-500"></i>
+                    UI/UX Design Prototypes (Figma)
+                </h3>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                    <!-- Figma Project 01 -->
+                    <a href="https://www.figma.com/proto/UvKrNnjaOBypki0IEbf7GP/%E7%84%A1%E9%A1%8C?node-id=1-5&p=f&t=2xU0qD5r3btzJiFz-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1"
+                       target="_blank"
+                       class="group bg-slate-50 hover:bg-white p-6 rounded-2xl border border-slate-200 hover:border-brand-400 shadow-sm hover:shadow-lg transition-all flex flex-col justify-between">
+                        <div>
+                            <div class="w-10 h-10 rounded-xl bg-pink-100 text-pink-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-layer-group"></i>
+                            </div>
+                            <h4 class="font-bold text-slate-900 text-lg group-hover:text-brand-600 transition-colors">Project_01</h4>
+                            <p class="mt-1.5 text-xs text-slate-600 leading-relaxed">Interactive web & mobile interface prototype crafted in Figma.</p>
+                        </div>
+                        <div class="mt-5 pt-3 border-t border-slate-200/70 flex items-center justify-between text-xs font-semibold text-brand-600">
+                            <span>Open Prototype</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </div>
+                    </a>
+
+                    <!-- Figma Project 02 -->
+                    <a href="https://www.figma.com/proto/GfyKhuLYuDUbwyjQyOyoBU/Park__%E9%9F%B3%E6%A5%BD?node-id=1-17&t=DtEFFiTDXOixXLXV-0&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1"
+                       target="_blank"
+                       class="group bg-slate-50 hover:bg-white p-6 rounded-2xl border border-slate-200 hover:border-brand-400 shadow-sm hover:shadow-lg transition-all flex flex-col justify-between">
+                        <div>
+                            <div class="w-10 h-10 rounded-xl bg-violet-100 text-violet-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-music"></i>
+                            </div>
+                            <h4 class="font-bold text-slate-900 text-lg group-hover:text-brand-600 transition-colors">Project_02 (Park Music)</h4>
+                            <p class="mt-1.5 text-xs text-slate-600 leading-relaxed">Music discovery & streaming UI prototype with clean visual hierarchy.</p>
+                        </div>
+                        <div class="mt-5 pt-3 border-t border-slate-200/70 flex items-center justify-between text-xs font-semibold text-brand-600">
+                            <span>Open Prototype</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </div>
+                    </a>
+
+                    <!-- Figma Project 03 -->
+                    <a href="https://www.figma.com/proto/enLJ02bF23MVMPAwDdg46O/%E7%84%A1%E9%A1%8C?node-id=1-32&t=DtEFFiTDXOixXLXV-0&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1"
+                       target="_blank"
+                       class="group bg-slate-50 hover:bg-white p-6 rounded-2xl border border-slate-200 hover:border-brand-400 shadow-sm hover:shadow-lg transition-all flex flex-col justify-between">
+                        <div>
+                            <div class="w-10 h-10 rounded-xl bg-cyan-100 text-cyan-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-compass"></i>
+                            </div>
+                            <h4 class="font-bold text-slate-900 text-lg group-hover:text-brand-600 transition-colors">Project_03</h4>
+                            <p class="mt-1.5 text-xs text-slate-600 leading-relaxed">Modern responsive layout system and user flow wireframe design.</p>
+                        </div>
+                        <div class="mt-5 pt-3 border-t border-slate-200/70 flex items-center justify-between text-xs font-semibold text-brand-600">
+                            <span>Open Prototype</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </div>
+                    </a>
+
+                    <!-- Figma Project 04 -->
+                    <a href="https://www.figma.com/proto/P57ZNTJckp9Zox3ggm32aT/%E7%84%A1%E9%A1%8C?node-id=1-13&t=DtEFFiTDXOixXLXV-0&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1"
+                       target="_blank"
+                       class="group bg-slate-50 hover:bg-white p-6 rounded-2xl border border-slate-200 hover:border-brand-400 shadow-sm hover:shadow-lg transition-all flex flex-col justify-between">
+                        <div>
+                            <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-mobile-screen"></i>
+                            </div>
+                            <h4 class="font-bold text-slate-900 text-lg group-hover:text-brand-600 transition-colors">Project_04</h4>
+                            <p class="mt-1.5 text-xs text-slate-600 leading-relaxed">User-centered application concept focused on intuitive navigation.</p>
+                        </div>
+                        <div class="mt-5 pt-3 border-t border-slate-200/70 flex items-center justify-between text-xs font-semibold text-brand-600">
+                            <span>Open Prototype</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERIENCE SECTION -->
+    <section id="experience" class="py-16 md:py-24 bg-slate-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-14">
+                <span class="text-xs font-bold uppercase tracking-widest text-brand-600">Milestones</span>
+                <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold text-slate-900">Experience & Highlights</h2>
+            </div>
+
+            <div class="relative border-l-2 border-brand-200 ml-3 sm:ml-6 space-y-8">
+                <!-- Item 1 -->
+                <div class="relative pl-8 sm:pl-10">
+                    <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-brand-600 ring-4 ring-brand-100"></span>
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200/90 shadow-sm">
+                        <span class="inline-block px-3 py-1 rounded-full bg-brand-50 text-brand-700 text-xs font-bold mb-2">
+                            2026 - Present
+                        </span>
+                        <h3 class="text-lg font-bold text-slate-900">Front-End & Software Development</h3>
+                        <p class="mt-2 text-sm text-slate-600 leading-relaxed">
+                            Developing responsive websites and web applications while improving front-end development skills alongside Python and Java software projects.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="relative pl-8 sm:pl-10">
+                    <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-cyan-500 ring-4 ring-cyan-100"></span>
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200/90 shadow-sm">
+                        <span class="inline-block px-3 py-1 rounded-full bg-cyan-50 text-cyan-700 text-xs font-bold mb-2">
+                            Project_01
+                        </span>
+                        <h3 class="text-lg font-bold text-slate-900">Interactive Web & Desktop Applications</h3>
+                        <p class="mt-2 text-sm text-slate-600 leading-relaxed">
+                            Built portfolio websites, JavaScript applications, a Python Calculator, a Java Entry Form, and interactive web projects using modern technologies.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="relative pl-8 sm:pl-10">
+                    <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-emerald-500 ring-4 ring-emerald-100"></span>
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200/90 shadow-sm">
+                        <span class="inline-block px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-bold mb-2">
+                            Project_02
+                        </span>
+                        <h3 class="text-lg font-bold text-slate-900">Digital Baggage Weight Measurement App</h3>
+                        <p class="mt-2 text-sm text-slate-600 leading-relaxed">
+                            Developed a digital app for measuring baggage weight with a clean, accessible user interface.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="py-16 md:py-24 bg-white border-t border-slate-200/70">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-14">
+                <span class="text-xs font-bold uppercase tracking-widest text-brand-600">Get In Touch</span>
+                <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold text-slate-900">Contact Me</h2>
+                <p class="mt-3 text-slate-600 text-sm sm:text-base">
+                    Have a project idea, internship opportunity, or question? Feel free to reach out directly.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
+                <!-- Contact Info Card -->
+                <div class="lg:col-span-2 bg-slate-900 text-white p-7 sm:p-8 rounded-3xl shadow-xl space-y-6">
+                    <div>
+                        <h3 class="text-xl font-bold">Contact Information</h3>
+                        <p class="mt-2 text-sm text-slate-300">
+                            Reach me via email, phone, or connect on GitHub and LinkedIn.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4 pt-2">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-brand-400 flex-shrink-0">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div class="min-w-0">
+                                <p class="text-xs text-slate-400">Email</p>
+                                <a href="mailto:it25083010@tsb-yyg.ac.jp" class="text-sm font-semibold hover:text-brand-300 break-all">
+                                    it25083010@tsb-yyg.ac.jp
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-emerald-400 flex-shrink-0">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-400">Phone</p>
+                                <a href="tel:080-9899-8135" class="text-sm font-semibold hover:text-emerald-300">
+                                    080-9899-8135
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-cyan-400 flex-shrink-0">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-400">Location</p>
+                                <p class="text-sm font-semibold">Tokyo, Japan</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Social Links -->
+                    <div class="pt-6 border-t border-white/15">
+                        <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3">Connect With Me</p>
+                        <div class="flex items-center gap-3">
+                            <a href="https://github.com/it25083010-afk" target="_blank"
+                               class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 hover:bg-brand-600 text-sm font-semibold transition-colors">
+                                <i class="fa-brands fa-github"></i> GitHub
+                            </a>
+                            <a href="https://www.linkedin.com" target="_blank"
+                               class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 hover:bg-brand-600 text-sm font-semibold transition-colors">
+                                <i class="fa-brands fa-linkedin"></i> LinkedIn
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Send Me a Message Form -->
+                <div class="lg:col-span-3 bg-slate-50 p-7 sm:p-8 rounded-3xl border border-slate-200 shadow-sm">
+                    <h3 class="text-xl font-bold text-slate-900 mb-5">Send Me a Message</h3>
+
+                    <form id="contactForm" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label for="contactName" class="block text-xs font-semibold text-slate-700 mb-1.5">Your Name</label>
+                                <input type="text" id="contactName" name="name" placeholder="Enter your name" required
+                                       class="w-full px-4 py-3 rounded-xl bg-white border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                            </div>
+
+                            <div>
+                                <label for="contactEmail" class="block text-xs font-semibold text-slate-700 mb-1.5">Your Email</label>
+                                <input type="email" id="contactEmail" name="email" placeholder="Enter your email" required
+                                       class="w-full px-4 py-3 rounded-xl bg-white border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="contactMessage" class="block text-xs font-semibold text-slate-700 mb-1.5">Message</label>
+                            <textarea id="contactMessage" name="message" rows="4" placeholder="Write Your Message..." required
+                                      class="w-full px-4 py-3 rounded-xl bg-white border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"></textarea>
+                        </div>
+
+                        <button type="submit"
+                                class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm shadow-lg shadow-brand-600/20 transition-all">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            Send Message
+                        </button>
+                    </form>
+
+                    <!-- Feedback Message Box (No alert()) -->
+                    <div id="contactFeedback" class="hidden mt-5 p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm flex items-center gap-3">
+                        <i class="fa-solid fa-circle-check text-emerald-600 text-lg"></i>
+                        <span id="contactFeedbackText">Thank you! Your message has been sent to Kumar Naval Kishor.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-950 text-slate-400 py-8 border-t border-slate-900">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm">
+            <p>© 2026 Kumar Naval Kishor. All Rights Reserved.</p>
+            <div class="flex items-center gap-5 text-xs">
+                <a href="#home" class="hover:text-white transition-colors">Back to Top ↑</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // 1. Mobile Navigation Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+
+        // 2. Python Calculator Interactive Logic
+        let calcExpression = '';
+        const calcDisplay = document.getElementById('calcDisplay');
+        const calcHistory = document.getElementById('calcHistory');
+
+        function calcAppend(val) {
+            if (calcDisplay.textContent === 'Error') calcExpression = '';
+            calcExpression += val;
+            calcDisplay.textContent = calcExpression;
+        }
+
+        function calcClear() {
+            calcExpression = '';
+            calcDisplay.textContent = '0';
+            calcHistory.textContent = '';
+        }
+
+        function calcBackspace() {
+            calcExpression = calcExpression.slice(0, -1);
+            calcDisplay.textContent = calcExpression || '0';
+        }
+
+        function calcEvaluate() {
+            if (!calcExpression) return;
+            try {
+                // Sanitize input to only allow math characters
+                if (!/^[0-9+\-*/.() ]+$/.test(calcExpression)) {
+                    throw new Error('Invalid Input');
+                }
+                const result = Function('"use strict";return (' + calcExpression + ')')();
+                if (!isFinite(result)) {
+                    calcHistory.textContent = calcExpression + ' =';
+                    calcDisplay.textContent = 'Error';
+                    calcExpression = '';
+                    return;
+                }
+                const formatted = Number.isInteger(result) ? result.toString() : parseFloat(result.toFixed(6)).toString();
+                calcHistory.textContent = calcExpression + ' =';
+                calcDisplay.textContent = formatted;
+                calcExpression = formatted;
+            } catch (e) {
+                calcDisplay.textContent = 'Error';
+                calcExpression = '';
+            }
+        }
+
+        // Python Project Tab Switcher
+        function switchPyTab(tab) {
+            const demoView = document.getElementById('pyDemoView');
+            const codeView = document.getElementById('pyCodeView');
+            const btnDemo = document.getElementById('pyTabDemo');
+            const btnCode = document.getElementById('pyTabCode');
+
+            if (tab === 'demo') {
+                demoView.classList.remove('hidden');
+                codeView.classList.add('hidden');
+                btnDemo.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-slate-900 shadow-sm transition-all';
+                btnCode.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:text-slate-900 transition-all';
+            } else {
+                demoView.classList.add('hidden');
+                codeView.classList.remove('hidden');
+                btnCode.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-slate-900 shadow-sm transition-all';
+                btnDemo.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:text-slate-900 transition-all';
+            }
+        }
+
+        // 3. Java Entry Form Interactive Logic
+        const javaEntryForm = document.getElementById('javaEntryForm');
+        const javaEntryTableBody = document.getElementById('javaEntryTableBody');
+        const entryCountBadge = document.getElementById('entryCountBadge');
+
+        function updateEntryCount() {
+            const count = javaEntryTableBody.querySelectorAll('tr').length;
+            entryCountBadge.textContent = `${count} Record${count === 1 ? '' : 's'}`;
+        }
+
+        javaEntryForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const name = document.getElementById('entryName').value.trim();
+            const email = document.getElementById('entryEmail').value.trim();
+            const course = document.getElementById('entryCourse').value;
+            const phone = document.getElementById('entryPhone').value.trim();
+
+            if (!name || !email) return;
+
+            const row = document.createElement('tr');
+            row.className = 'bg-emerald-50/50 transition-colors';
+            row.innerHTML = `
+                <td class="py-2 px-3 font-medium">${escapeHtml(name)}</td>
+                <td class="py-2 px-3"><span class="px-2 py-0.5 rounded-md bg-brand-50 text-brand-700 font-medium">${escapeHtml(course)}</span></td>
+                <td class="py-2 px-3 text-slate-500">${escapeHtml(email)}</td>
+            `;
+            javaEntryTableBody.prepend(row);
+            updateEntryCount();
+            javaEntryForm.reset();
+        });
+
+        function clearJavaEntries() {
+            javaEntryTableBody.innerHTML = '';
+            updateEntryCount();
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Java Project Tab Switcher
+        function switchJavaTab(tab) {
+            const demoView = document.getElementById('javaDemoView');
+            const codeView = document.getElementById('javaCodeView');
+            const btnDemo = document.getElementById('javaTabDemo');
+            const btnCode = document.getElementById('javaTabCode');
+
+            if (tab === 'demo') {
+                demoView.classList.remove('hidden');
+                codeView.classList.add('hidden');
+                btnDemo.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-slate-900 shadow-sm transition-all';
+                btnCode.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:text-slate-900 transition-all';
+            } else {
+                demoView.classList.add('hidden');
+                codeView.classList.remove('hidden');
+                btnCode.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-slate-900 shadow-sm transition-all';
+                btnDemo.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:text-slate-900 transition-all';
+            }
+        }
+
+        // 4. Copy Code Helper (using execCommand fallback for iFrame safety)
+        function copyCode(elementId, btn) {
+            const text = document.getElementById(elementId).innerText;
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                const original = btn.innerHTML;
+                btn.innerHTML = '<i class="fa-solid fa-check text-emerald-400 mr-1"></i>Copied';
+                setTimeout(() => { btn.innerHTML = original; }, 2000);
+            } catch (err) {
+                console.error('Copy failed', err);
+            }
+            document.body.removeChild(textarea);
+        }
+
+        // 5. Contact Form Submission Feedback
+        const contactForm = document.getElementById('contactForm');
+        const contactFeedback = document.getElementById('contactFeedback');
+        const contactFeedbackText = document.getElementById('contactFeedbackText');
+
+        contactForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const senderName = document.getElementById('contactName').value.trim();
+            contactFeedbackText.textContent = `Thank you, ${senderName}! Your message has been received by Kumar Naval Kishor.`;
+            contactFeedback.classList.remove('hidden');
+            contactForm.reset();
+        });
+    </script>
+</body>
+</html>
